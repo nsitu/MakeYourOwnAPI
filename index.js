@@ -24,6 +24,10 @@ MongoClient.connect(MONGODB_URI, { useUnifiedTopology: true })
     // e.g. you could make your own colleciton in MongoDB and expose it as an API
     const myCollection = client.db("sample_airbnb").collection("listingsAndReviews")
 
+    app.get('/', (req, res) => {
+        res.send('This is a basic API to access data from MongoDB, using the AirBNB sample collection. <a href="https://github.com/nsitu/MakeYourOwnAPI#readme">Read the Documentation</a> to learn more.')
+    })
+
     // Let's create a basic endpoint for houses.
     // It will show the first 20 lisitings of the type "House"
     // Express will listen for GET requests at the /houses URL 
