@@ -24,19 +24,35 @@ MongoClient.connect(MONGODB_URI, { useUnifiedTopology: true })
     // e.g. you could make your own colleciton in MongoDB and expose it as an API
     const myCollection = client.db("sample_airbnb").collection("listingsAndReviews")
 
-    app.get('/airbnb', (req, res) => { 
-        // Filters let you limit the results based on given criteria. 
+    // Let's create a basic endpoint for houses.
+    // It will show the first 20 lisitings of the type "House"
+    // Express will listen for GET requests at the /houses URL 
+    app.get('/houses', (req, res) => { 
+        // Filters let us limit the results based on given criteria. 
         // Read more here: https://docs.mongodb.com/compass/current/query/filter/
-        // Note the use of the greater than operator
-        // Read more about operators here: https://docs.mongodb.com/manual/reference/operator/query/ 
         let filter = {
-            property_type: "House",
-            bedrooms: {$gt: 1}
+            property_type: "House"
+        } 
+        myCollection.find(filter)
+          .limit(20)    /* limit the results to 20 */
+          .toArray()
+          .then(json => res.send( json ))
+          .catch(err => res.send({message:"Error"}) )
+    })
+
+    // let's make another endpoint for "large" places
+    // i.e. airbnb listings with more than 4 bedrooms
+    app.get('/large', (req, res) => { 
+
+        // Note the use of the $gt (greater than) operator here
+        // See also: https://docs.mongodb.com/manual/reference/operator/query/ 
+        let filter = {
+            bedrooms: {$gt: 4}
         }
         // Projections let you choose which fields to include. Read more here:
         // https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/ 
         let options = {
-            projection: {name:1,property_type:1, bedrooms:1},
+            projection: {name:1, property_type:1, bedrooms:1},
             sort:{name:1}
         }
         myCollection.find(filter, options)
@@ -46,7 +62,10 @@ MongoClient.connect(MONGODB_URI, { useUnifiedTopology: true })
           .catch(err => res.send({message:"Error"}) )
     })
 
-    app.get('/airbnb/search/', (req, res) => { 
+    // Let's make a search endpoint 
+    // that allows users to provide a search term
+    // via query parameter
+    app.get('/search', (req, res) => { 
         
         // here we are using the "search" parameter to let users 
         // find listings whose name contains a given string.
@@ -62,15 +81,15 @@ MongoClient.connect(MONGODB_URI, { useUnifiedTopology: true })
 
         // here we allow the user to set their own limit via query parameters. 
         let limit = parseInt(req.query.limit)
-        if (!limit) limit = 5;
+        // if no limit is provided, set a default
+        if (!limit) limit = 5; 
 
         myCollection.find(filter, options)
           .limit(limit)
           .toArray()
           .then(json => res.send( json ))
           .catch(err => res.send({message:"Error"}) )
-    })
-
+    }) 
 
     app.listen(PORT, () =>  console.log(`listening on ${PORT}`)  )
 
