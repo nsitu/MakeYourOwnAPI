@@ -8,7 +8,7 @@ You must create a free [MongoDB Atlas](https://www.mongodb.com/atlas/database) C
 You should add your MongoDB connection string as an environent variable. For example, it might look something like this: `MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net`. (Replace "username" and "password" in the connection string with your actual username and password).
 
 # API Endpoints  
-This app exposes three API endpoints, each of which has a different purpose:
+This app exposes several API endpoints, each of which has a different purpose:
 The `/houses` endpoint returns the first 20 listings that match the property type "House". This endpoint shows all data fields
 The `/large` endpoint returns the first 20 listings that have more than 4 bedrooms.  
 The `/search` endpoint allows you to modify results based on query parameters. (e.g. `search=cozy` or `limit=100`)
