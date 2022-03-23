@@ -29,3 +29,4 @@ You can deploy this code to Heroku fairly easily. The `package.json` includes a 
 [https://ixd-airbnb-api.herokuapp.com/houses](https://ixd-airbnb-api.herokuapp.com/houses)  
 [https://ixd-airbnb-api.herokuapp.com/large](https://ixd-airbnb-api.herokuapp.com/large)  
 [https://ixd-airbnb-api.herokuapp.com/search?search=cozy&limit=100](https://ixd-airbnb-api.herokuapp.com/search?search=cozy&limit=100)  
+[https://ixd-airbnb-api.herokuapp.com/listing/9094914](https://ixd-airbnb-api.herokuapp.com/listing/9094914)  
