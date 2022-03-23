@@ -16,6 +16,7 @@ const cors = require ('cors')
 app.use( cors() ); 
 
 // Connect to MongoDB
+// See also https://www.mongodb.com/docs/drivers/node/current/fundamentals/connection/
 MongoClient.connect(MONGODB_URI, { useUnifiedTopology: true })
 .then(client =>{
     
