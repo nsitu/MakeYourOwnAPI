@@ -11,6 +11,10 @@ const { MongoClient } = require('mongodb')
 const express = require('express') // include express  
 const app = express()
 
+// Cross Origin Resource Sharing
+const cors = require ('cors')         
+app.use( cors() ); 
+
 // Connect to MongoDB
 MongoClient.connect(MONGODB_URI, { useUnifiedTopology: true })
 .then(client =>{
