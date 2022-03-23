@@ -9,9 +9,13 @@ You should add your MongoDB connection string as an environent variable. For exa
 
 # API Endpoints  
 This app exposes three API endpoints, each of which has a different purpose:
-The `/houses` endpoint returns the first 20 listings that match the property type "House".  
+The `/houses` endpoint returns the first 20 listings that match the property type "House". This endpoint shows all data fields
 The `/large` endpoint returns the first 20 listings that have more than 4 bedrooms.  
-The `/search` endpoint allows you to modify results based on query parameters. (e.g. `search=river` or `limit=50`)
+The `/search` endpoint allows you to modify results based on query parameters. (e.g. `search=cozy` or `limit=100`)
+The `/listing/:id` endpoint returns a single listing based on a provided ID number.
+
+# Adapting the Code
+Feel free to use this code as a kind of boilerplate, e.g. by adapting it to work with your own dataset, or one of the other [Sample Datasets](https://docs.atlas.mongodb.com/sample-data/). 
 
 # Working Locally 
 If you have NodeJS installed, you can run this app locally. Clone it to a folder of your choosing, and then run:  
@@ -24,4 +28,4 @@ You should then see `listening on 5000` on your terminal. You can then open your
 You can deploy this code to Heroku fairly easily. The `package.json` includes a `start` script that tells Heroku to automatically run `node index.js`. For Example, you can see test out the endpoints here:  
 [https://ixd-airbnb-api.herokuapp.com/houses](https://ixd-airbnb-api.herokuapp.com/houses)
 [https://ixd-airbnb-api.herokuapp.com/large](https://ixd-airbnb-api.herokuapp.com/large)
-[https://ixd-airbnb-api.herokuapp.com/search?search=river](https://ixd-airbnb-api.herokuapp.com/search?search=river)
+[https://ixd-airbnb-api.herokuapp.com/search?search=cozy&limit=100](https://ixd-airbnb-api.herokuapp.com/search?search=cozy&limit=100)

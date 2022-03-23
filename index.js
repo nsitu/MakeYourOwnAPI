@@ -91,6 +91,24 @@ MongoClient.connect(MONGODB_URI, { useUnifiedTopology: true })
           .catch(err => res.send({message:"Error"}) )
     }) 
 
+
+    // Let's make an endpoint to show a single listing 
+    // users can supply an ID as part of the URL itself. 
+    // Since we want a detailed view (all the fields) here,
+    // we will avoid using a projection. 
+    app.get('/listing/:id', (req, res) => { 
+         
+        let filter = {
+            _id: req.params.id
+        }  
+        myCollection.find(filter)
+          .limit(1)
+          .toArray()
+          .then(json => res.send( json ))
+          .catch(err => res.send({message:"Error"}) )
+    }) 
+
+
     app.listen(PORT, () =>  console.log(`listening on ${PORT}`)  )
 
 })
